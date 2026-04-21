@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/destyle.css">
+    <link rel="stylesheet" href="css/index.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+
+    <div class="topPage">
+            <div class="topPage-text">
+                <h1>AKINA_ <br>
+                <span>portfolio</span></h1>
+            </div><!--topPage-text-->
+
+            <div class="topPage-text2">
+              <h2>|ご訪問くださり<br><span>ありがとうございます</span> </h2>
+          </div><!--topPage-text2-->
+          
+          <div class="topPage-box1">
+          
+        </div><!--topPage-box1-->
+
+
+            <div id="container">
+                <!-- 背景图片 -->
+                <img id="background" src="img/1_背景_最终.jpg" alt="Background">
+                
+                <!-- SVG 裁剪效果 -->
+                <svg id="bubble">
+                  <defs>
+                    <clipPath id="bubble-clip">
+                        
+                      <path id="blob" fill="#FFFFFF" d="M56.7,-54.9C70.8,-42.7,77.6,-21.3,74.6,-3C71.6,15.4,58.8,30.7,44.8,42.8C30.7,54.8,15.4,63.5,-3.7,67.3C-22.8,71,-45.6,69.7,-55,57.6C-64.5,45.6,-60.7,22.8,-56.9,3.8C-53.1,-15.2,-49.3,-30.3,-39.8,-42.5C-30.3,-54.7,-15.2,-64,3.1,-67.1C21.3,-70.2,42.7,-67.1,56.7,-54.9Z" transform="translate(100 100) " />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div><!--container-->
+
+              <div id="container-right">
+                  <svg id="svg-right" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" >
+                    <path id="blob-right" fill="#BAE6FF" d="M32.5,-46.8C41.4,-38.2,47.6,-27.8,52.7,-16.2C57.8,-4.5,61.9,8.5,61.1,22.6C60.3,36.7,54.5,51.9,43.5,57C32.5,62,16.3,56.9,1.6,54.8C-13.1,52.6,-26.3,53.5,-39.6,49.1C-52.9,44.8,-66.3,35.4,-72.3,22.2C-78.3,9.1,-76.8,-7.7,-68.4,-18.8C-60.1,-29.8,-44.8,-35.2,-32.2,-42.6C-19.6,-50.1,-9.8,-59.6,1,-60.9C11.8,-62.3,23.5,-55.4,32.5,-46.8Z" transform="translate(100 100)" />
+                  </svg>
+            </div><!--container-right-->
+    </div><!--topPage-->
+
+
+    
+
+    <!----===========================================-->
+    <div class="webPage">
+
+    </div><!--webPage-->
+
+
+    <!----===========================================-->
+    <div class="worksPage">
+
+    </div><!--worksPage-->
+
+
+    <!----===========================================-->
+    <div class="illustPage">
+
+    </div><!--illustPage-->
+
+
+    <!----===========================================-->
+    <div class="footerPage">
+
+    </div><!--footerPage-->
+
+
+
+
+
+
+
+
+    <div class="cursor-text">CLICK!</div>
+
+    <!-- GSAP 动画库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- Anime.js 动画库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+  <script>
+    const blob = document.getElementById('blob');
+    const background = document.getElementById('background');
+    const bubble = document.getElementById('bubble');
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+    // 动态更新 SVG 跟随鼠标裁剪图片，并且放大透过区域
+function updateClipPath() {
+  const offsetX = mouseX - window.innerWidth / 2;
+  const offsetY = mouseY - window.innerHeight / 2;
+
+  // 根据鼠标距离屏幕中央的距离来决定缩放的大小
+  const scaleAmount = Math.min(9, Math.max(6, Math.sqrt(offsetX * offsetX + offsetY * offsetY) / 200));
+
+  // 更新 background 的裁剪路径
+  background.style.clipPath = `url(#bubble-clip)`;
+  
+  // 通过 scale() 放大该区域
+  blob.setAttribute(
+    "transform",
+    `translate(${mouseX}, ${mouseY}) scale(${scaleAmount})`
+  );
+
+  requestAnimationFrame(updateClipPath);
+}
+
+    // 鼠标跟随更新位置
+    window.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    // GSAP 动画实现 SVG 动态路径变化
+    gsap.to("#blob", {
+      duration: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: "power1.inOut",
+      attr: {
+        d: "M47.4,-47.5C59.4,-35.3,66,-17.6,65.1,-0.9C64.2,15.9,55.9,31.7,43.8,43C31.7,54.2,15.9,60.8,-1.5,62.3C-18.9,63.9,-37.8,60.3,-51.3,49C-64.8,37.8,-73,18.9,-72.6,0.4C-72.3,-18.2,-63.4,-36.3,-49.8,-48.5C-36.3,-60.7,-18.2,-66.9,-0.3,-66.6C17.6,-66.4,35.3,-59.6,47.4,-47.5Z"
+      }
+    });
+
+    // 初始化
+    updateClipPath();
+    ///==========右上角泡泡==========
+    gsap.to("#blob-right", {
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut",
+            attr: {
+                d: "M27.3,-41C35.4,-31.7,42,-23.7,51.9,-12.4C61.9,-1,75.1,13.9,76.5,29.6C77.9,45.2,67.4,61.8,52.6,65.1C37.9,68.4,19,58.6,7,49C-5,39.4,-10.1,30.1,-25,26.9C-39.9,23.6,-64.7,26.3,-73.9,19.1C-83.1,11.8,-76.8,-5.5,-64.9,-14.7C-53.1,-23.8,-35.8,-24.7,-24.1,-32.8C-12.4,-41,-6.2,-56.3,1.7,-58.7C9.6,-61,19.2,-50.4,27.3,-41Z"
+            }
+        });
+    //=======进入效果=======
+    const area = document.getElementById('background'); // 替换为你的区域或图片元素 ID
+    area.addEventListener('click', () => {
+    document.body.style.transition = 'opacity 0.5s';
+    document.body.style.opacity = '0';
+    setTimeout(() => {
+        window.location.href = 'index2.html'; // 替换为你的主页地址
+    }, 500);
+    });
+
+    //===click
+    document.addEventListener("mousemove", (e) => {
+    let cursorText = document.querySelector(".cursor-text");
+    cursorText.style.left = e.pageX + "px";
+    cursorText.style.top = e.pageY + "px";
+});
+
+document.querySelectorAll(".header-text ul li a").forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+        document.querySelector(".cursor-text").style.opacity = 1;
+    });
+    item.addEventListener("mouseleave", () => {
+        document.querySelector(".cursor-text").style.opacity = 0;
+    });
+});
+
+    
+  </script>
+
+    
+</body>
+</html>
